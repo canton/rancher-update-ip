@@ -9,6 +9,8 @@ defaults: &defaults
     secret: <%= ENV['RANCHER_SECRET'] %>
     dns_service: <%= ENV['RANCHER_DNS_SERVICE'] %>
 
+  period: <%= ENV['PERIOD'] || '10m' %>
+
 development:
   <<: *defaults
 

@@ -6,10 +6,28 @@ require File.expand_path('lib/rancher_client', File.dirname(__FILE__))
 
 include Logging.globally(:log)
 
-log.info 'Start updating public IP'
+scheduler = Rufus::Scheduler.singleton
 
-awsMetadata = AwsMetadata.new
-rancher_client = RancherClient.new
+log.info 'Starting job - rancher-update-ip'
 
-result = rancher_client.update_public_ip(awsMetadata.hostname, awsMetadata.public_ip)
-rancher_client.update_dns if result
+# Shutdown procedure, wait for running jobs then exit
+shutdown = proc do
+  # Using a thread otherwise lock won't work
+  Thread.new { log.debug 'Scheduler shutdown initiated' }
+  scheduler.shutdown(:wait)
+end
+
+# Intercept INT and TERM signal initiating a shutdown
+trap :INT, &shutdown
+trap :TERM, &shutdown
+
+scheduler.interval Settings.period, first: :now do
+  awsMetadata = AwsMetadata.new
+  rancher_client = RancherClient.new
+
+  result = rancher_client.update_public_ip(awsMetadata.hostname, awsMetadata.public_ip)
+  rancher_client.update_dns if result
+end
+
+scheduler.join
+log.info 'All jobs have been terminated, exiting'

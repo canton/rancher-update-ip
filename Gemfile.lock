@@ -26,6 +26,7 @@ GEM
       httparty (~> 0.11)
       json
       rack
+    rufus-scheduler (3.2.1)
     settingslogic (2.0.9)
     slop (3.6.0)
 
@@ -37,6 +38,7 @@ DEPENDENCIES
   logging
   pry-byebug
   raygun4ruby
+  rufus-scheduler
   settingslogic
 
 RUBY VERSION
