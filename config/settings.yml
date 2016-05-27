@@ -9,6 +9,9 @@ defaults: &defaults
     secret: <%= ENV['RANCHER_SECRET'] %>
     dns_service: <%= ENV['RANCHER_DNS_SERVICE'] %>
 
+  raygun:
+    api_key: <%= ENV['RAYGUN_APIKEY'] %>
+
   period: <%= ENV['PERIOD'] || '10m' %>
 
 development:

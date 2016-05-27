@@ -8,6 +8,7 @@ require File.expand_path('./settings', File.dirname(__FILE__))
 Logging.logger.root.appenders = Logging.appenders.stdout
 
 Raygun.setup do |config|
-  # config.api_key = Settings.raygun.api_key
-  # config.enable_reporting = ENV['RACK_ENV'] != 'development'
+  config.api_key = Settings.raygun.api_key
+  config.enable_reporting = ENV['RACK_ENV'] != 'development'
+  config.tags = ['rancher-update-ip']
 end

@@ -13,3 +13,4 @@ http://docs.rancher.com/rancher/latest/en/rancher-services/dns-service/#using-a-
 - `RANCHER_SECRET` = Environment API Key Secret
 - `RANCHER_DNS_SERVICE` = Service name of External DNS Service
 - `PERIOD` = default is 10 minutes (e.g. '10m')
+- `RAYGUN_APIKEY` = Raygun API Key

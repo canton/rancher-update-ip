@@ -1,0 +1,15 @@
+runner:
+  environment:
+    RANCHER_URL: url
+    RANCHER_KEY: key
+    RANCHER_SECRET: secret
+    RACK_ENV: production
+    RANCHER_DNS_SERVICE: service
+    PERIOD: '5m'
+    RAYGUN_APIKEY: raygun-key
+  log_driver: ''
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: 'true'
+  log_opt: {}
+  image: welab/rancher-update-host-ip:ken

@@ -8,6 +8,8 @@ class AwsMetadata
   end
 
   def hostname
+    return ENV['TARGET_HOSTNAME'] if ENV['RACK_ENV'] == 'development'
+
     uri = URI::join(base_url, 'local-hostname')
 
     log.info "finding EC2 hostname: #{uri.to_s}"
@@ -18,6 +20,8 @@ class AwsMetadata
   end
 
   def public_ip
+    return ENV['TARGET_IP'] if ENV['RACK_ENV'] == 'development'
+
     uri = URI::join(base_url, 'public-ipv4')
 
     log.info "finding EC2 public IP: #{uri.to_s}"
