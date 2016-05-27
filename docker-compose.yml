@@ -1,0 +1,3 @@
+runner:
+  build: .
+  env_file: .env.dev

@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require File.expand_path('config/boot', File.dirname(__FILE__))
+require File.expand_path('lib/aws_metadata', File.dirname(__FILE__))
+require File.expand_path('lib/rancher_client', File.dirname(__FILE__))
+
+include Logging.globally(:log)
+
+log.info 'Start updating public IP'
+
+awsMetadata = AwsMetadata.new
+rancher_client = RancherClient.new
+
+rancher_client.update_public_ip(awsMetadata.hostname, awsMetadata.public_ip)
+rancher_client.update_dns

@@ -1,0 +1,16 @@
+defaults: &defaults
+  aws:
+    metadata:
+      base_url: 'http://169.254.169.254/latest/meta-data/'
+
+  rancher:
+    url: <%= ENV['RANCHER_URL'] %>
+    key: <%= ENV['RANCHER_KEY'] %>
+    secret: <%= ENV['RANCHER_SECRET'] %>
+    dns_service: <%= ENV['RANCHER_DNS_SERVICE'] %>
+
+development:
+  <<: *defaults
+
+production:
+  <<: *defaults
