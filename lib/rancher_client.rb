@@ -54,8 +54,12 @@ class RancherClient
     containers['data'].each do |container|
       restart_url = container['actions']['restart']
 
-      log.info "restarting container #{container['id']}: #{restart_url}"
-      HTTParty.post(restart_url, basic_auth: auth)
+      if restart_url
+        log.info "restarting container #{container['id']}: #{restart_url}"
+        HTTParty.post(restart_url, basic_auth: auth)
+      else
+        log.info "container #{container['id']} is now #{container['state']}"
+      end
     end
     true
   end
